@@ -481,7 +481,7 @@
     <div class="config-bar" id="config-bar" style="display:none;">
       <div class="cf">
         <label>ID del Google Sheet</label>
-        <input type="text" id="sheet-id" placeholder="1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms">
+        <input type="text" id="sheet-id" placeholder="1s-Mc9sCT5mvidWtT1_vQpDWdXMY311FXHwY1KlYofP4">
       </div>
       <div class="cf">
         <label>Pestaña</label>
@@ -584,7 +584,7 @@ function intentarLogin() {
   document.getElementById('topbar-estado').textContent = SEDES[key].estado;
 
   // Preconfigurar y cargar datos automáticamente
-  document.getElementById('sheet-id').value = '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms';
+  document.getElementById('sheet-id').value = '1s-Mc9sCT5mvidWtT1_vQpDWdXMY311FXHwY1KlYofP4';
   document.getElementById('sheet-tab').value = 'Hoja 1';
   document.getElementById('col-sede').value = 'I';
   document.getElementById('col-fecha').value = 'A';
@@ -727,8 +727,13 @@ function renderTabla(datos) {
       let badge = '';
       if (i === colFecha && val) {
         try {
-          const esHoy = new Date(val).toDateString() === hoy;
-          val = new Date(val).toLocaleDateString('es-MX');
+          let f;
+          if (typeof val === 'string' && val.startsWith('Date(')) {
+            const parts = val.replace('Date(','').replace(')','').split(',').map(Number);
+            f = new Date(parts[0], parts[1], parts[2]);
+          } else { f = new Date(val); }
+          const esHoy = f.toDateString() === hoy;
+          val = f.toLocaleDateString('es-MX');
           if (esHoy) badge = '<span class="badge-hoy">hoy</span>';
         } catch(e) {}
       }
