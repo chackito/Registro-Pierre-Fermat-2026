@@ -481,7 +481,7 @@
     <div class="config-bar" id="config-bar" style="display:none;">
       <div class="cf">
         <label>ID del Google Sheet</label>
-        <input type="text" id="sheet-id" placeholder="1s-Mc9sCT5mvidWtT1_vQpDWdXMY311FXHwY1KlYofP4">
+        <input type="text" id="sheet-id" placeholder="1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms">
       </div>
       <div class="cf">
         <label>Pestaña</label>
@@ -584,7 +584,7 @@ function intentarLogin() {
   document.getElementById('topbar-estado').textContent = SEDES[key].estado;
 
   // Preconfigurar y cargar datos automáticamente
-  document.getElementById('sheet-id').value = '1s-Mc9sCT5mvidWtT1_vQpDWdXMY311FXHwY1KlYofP4';
+  document.getElementById('sheet-id').value = '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms';
   document.getElementById('sheet-tab').value = 'Hoja 1';
   document.getElementById('col-sede').value = 'I';
   document.getElementById('col-fecha').value = 'A';
@@ -658,7 +658,7 @@ async function cargarDatos(silencioso = false) {
     const cols = json.table.cols;
     const rows = json.table.rows;
 
-    headers = cols.map(c => c.label || '');
+    headers = cols.map(c => c.label || c.id || '');
     const hoy = new Date().toDateString();
     todosAlumnos = [];
     let registradosHoy = 0;
