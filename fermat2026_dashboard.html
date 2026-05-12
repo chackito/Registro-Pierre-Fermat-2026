@@ -658,7 +658,8 @@ async function cargarDatos(silencioso = false) {
     const cols = json.table.cols;
     const rows = json.table.rows;
 
-    headers = cols.map(c => c.label || c.id || '');
+    const HEADER_NAMES = ['Folio','Fecha','Nombre','Apellido Paterno','Apellido Materno','Correo','Género','Nivel','Sede','Escuela','Discapacidad'];
+    headers = cols.map((c, i) => c.label || HEADER_NAMES[i] || c.id || ('Col '+(i+1)));
     const hoy = new Date().toDateString();
     todosAlumnos = [];
     let registradosHoy = 0;
@@ -732,9 +733,11 @@ function renderTabla(datos) {
             const parts = val.replace('Date(','').replace(')','').split(',').map(Number);
             f = new Date(parts[0], parts[1], parts[2]);
           } else { f = new Date(val); }
-          const esHoy = f.toDateString() === hoy;
-          val = f.toLocaleDateString('es-MX');
-          if (esHoy) badge = '<span class="badge-hoy">hoy</span>';
+          if (!isNaN(f)) {
+            const esHoy = f.toDateString() === hoy;
+            val = f.toLocaleDateString('es-MX');
+            if (esHoy) badge = '<span class="badge-hoy">hoy</span>';
+          }
         } catch(e) {}
       }
       html += `<td>${val}${badge}</td>`;
