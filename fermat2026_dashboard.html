@@ -636,7 +636,7 @@ async function cargarDatos(silencioso = false) {
   colSede  = colLetraAIdx(letraSede);
   colFecha = letraFecha ? colLetraAIdx(letraFecha) : -1;
 
-  const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&gid=0`;
+  const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json&gid=0&tq=select%20*`;
 
   if (!silencioso) {
     document.getElementById('tabla-wrapper').innerHTML = '<div class="status-row"><div class="spinner"></div><br>Cargando datos...</div>';
@@ -673,6 +673,7 @@ async function cargarDatos(silencioso = false) {
     const prefijo = esMulti ? sede.valorSede.trim().toLowerCase() : null;
 
     rows.forEach((row, i) => {
+      if (i === 0) return;
       const cells = row.c || [];
       const sedeVal = String(cells[colSede]?.v ?? '').trim().toLowerCase();
       const coincide = esMulti
