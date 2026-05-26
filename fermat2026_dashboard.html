@@ -719,8 +719,8 @@ function renderTabla(datos) {
   }
 
   const hoy = new Date().toDateString();
-  const esMultiVis = SEDES[sedeActual]?.multiEstado ?? false;
-  const visibles = headers.map((h, i) => (esMultiVis || i !== colSede) ? i : null).filter(i => i !== null);
+  const esCoordEdomex = SEDES[sedeActual]?.multiEstado ?? false;
+  const visibles = headers.map((h, i) => i).filter(i => esCoordEdomex || i !== colSede);
 
   let html = '<table><thead><tr><th>#</th>';
   visibles.forEach(i => { html += `<th>${headers[i] || 'Col '+(i+1)}</th>`; });
@@ -764,8 +764,8 @@ function filtrar() {
 // ——— DESCARGAR CSV ———
 function descargarCSV() {
   if (!todosAlumnos.length) return;
-  const esMultiVis = SEDES[sedeActual]?.multiEstado ?? false;
-  const visibles = headers.map((h, i) => (esMultiVis || i !== colSede) ? i : null).filter(i => i !== null);
+  const esCoordEdomex = SEDES[sedeActual]?.multiEstado ?? false;
+  const visibles = headers.map((h, i) => i).filter(i => esCoordEdomex || i !== colSede);
   const enc = visibles.map(i => headers[i] || 'Col '+(i+1));
   const filas = todosAlumnos.map(fila => visibles.map(i => `"${String(fila[i]??'').replace(/"/g,'""')}"`));
   const csv = [enc.join(','), ...filas.map(f => f.join(','))].join('\n');
@@ -779,8 +779,8 @@ function descargarCSV() {
 // ——— DESCARGAR EXCEL ———
 function descargarExcel() {
   if (!todosAlumnos.length) return;
-  const esMultiVis = SEDES[sedeActual]?.multiEstado ?? false;
-  const visibles = headers.map((h, i) => (esMultiVis || i !== colSede) ? i : null).filter(i => i !== null);
+  const esCoordEdomex = SEDES[sedeActual]?.multiEstado ?? false;
+  const visibles = headers.map((h, i) => i).filter(i => esCoordEdomex || i !== colSede);
   const enc = visibles.map(i => headers[i] || 'Col '+(i+1));
   const filas = todosAlumnos.map(fila => visibles.map(i => fila[i] ?? ''));
   const ws = XLSX.utils.aoa_to_sheet([enc, ...filas]);
