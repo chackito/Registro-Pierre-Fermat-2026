@@ -663,7 +663,7 @@ async function cargarDatos(silencioso = false) {
     const rows = json.table.rows;
 
     const HEADER_NAMES = ['Folio','Fecha','Nombre','Apellido Paterno','Apellido Materno','Correo','Género','Nivel','Sede','Escuela','Discapacidad'];
-    headers = cols.map((c, i) => HEADER_NAMES[i] || c.label || c.id || ('Col '+(i+1)));
+    headers = cols.map((c, i) => HEADER_NAMES[i] || c.id || ('Col '+(i+1)));
     const hoy = new Date().toDateString();
     todosAlumnos = [];
     let registradosHoy = 0;
