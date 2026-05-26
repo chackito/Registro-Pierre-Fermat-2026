@@ -673,7 +673,6 @@ async function cargarDatos(silencioso = false) {
     const prefijo = esMulti ? sede.valorSede.trim().toLowerCase() : null;
 
     rows.forEach((row, i) => {
-      if (i === 0) return;
       const cells = row.c || [];
       const sedeVal = String(cells[colSede]?.v ?? '').trim().toLowerCase();
       const coincide = esMulti
