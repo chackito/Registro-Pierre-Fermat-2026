@@ -409,6 +409,55 @@
     color: var(--muted);
     background: var(--paper);
   }
+
+  /* Sección de descargas */
+  .downloads-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 24px 28px;
+    margin-bottom: 24px;
+  }
+  .downloads-card h3 {
+    margin: 0 0 16px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #0d1b2a;
+  }
+  .downloads-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .btn-download {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: #faf7f0;
+    border: 1.5px solid #d9cfc0;
+    border-radius: 8px;
+    color: #0d1b2a;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+    cursor: pointer;
+  }
+  .btn-download:hover {
+    background: #f0e8d6;
+    border-color: #c8922a;
+    color: #c8922a;
+  }
+  .btn-download .dl-icon { font-size: 18px; }
+  .dl-nivel {
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
 </style>
 </head>
 <body>
@@ -525,6 +574,12 @@
       </div>
     </div>
 
+    <!-- Descargas -->
+    <div class="downloads-card" id="downloads-section" style="display:none;">
+      <h3>📄 Material del Concurso</h3>
+      <div id="downloads-content"></div>
+    </div>
+
     <!-- Tabla -->
     <div class="table-card">
       <div class="table-header">
@@ -551,20 +606,20 @@
 // ——— CREDENCIALES POR SEDE ———
 // CAMBIA LAS CONTRASEÑAS AQUÍ ANTES DE DISTRIBUIR
 const SEDES = {
-  ESFM_IPN:        { nombre: "Escuela Superior de Física y Matemáticas del IPN", estado: "Ciudad de México", pass: "fermat_esfm_2026",     valorSede: "CDMX — ESCUELA SUPERIOR DE FÍSICA Y MATEMÁTICAS DEL IPN" },
-  ITI_GRO:         { nombre: "Instituto Tecnológico de Iguala", estado: "Guerrero", pass: "fermat_iguala_2026",                             valorSede: "GUERRERO — INSTITUTO TECNOLÓGICO DE IGUALA" },
-  HARKNESS_NAY:    { nombre: "Instituto Harkness en Bahía de Banderas", estado: "Nayarit", pass: "fermat_harkness_2026",                   valorSede: "NAYARIT — INSTITUTO HARKNESS EN BAHÍA DE BANDERAS" },
-  UNPA_OAX:        { nombre: "Universidad del Papaloapan", estado: "Oaxaca", pass: "fermat_unpa_2026",                                     valorSede: "OAXACA — UNIVERSIDAD DEL PAPALOAPAN" },
-  UTM_OAX:         { nombre: "Universidad Tecnológica de la Mixteca", estado: "Oaxaca", pass: "fermat_utm_2026",                           valorSede: "OAXACA — UNIVERSIDAD TECNOLÓGICA DE LA MIXTECA, HUAJUAPAN DE LEÓN" },
-  JTB_PUE:         { nombre: 'Bachillerato Gral. Oficial "Jaime Torres Bodet"', estado: "Puebla", pass: "fermat_jtb_2026",               valorSede: 'PUEBLA — BACHILLERATO GRAL. OFICIAL "JAIME TORRES BODET"' },
-  ZAPATA_BUAP:     { nombre: "Preparatorio Emiliano Zapata, BUAP", estado: "Puebla", pass: "fermat_zapata_2026",                           valorSede: "PUEBLA — PREPARATORIO EMILIANO ZAPATA, BUAP" },
-  PREPATEC_SLP:    { nombre: "PrepaTeC San Luis Potosí", estado: "San Luis Potosí", pass: "fermat_prepatec_2026",                          valorSede: "SAN LUIS POTOSÍ — PREPATEC" },
-  ALTAMIRANO_TLAX: { nombre: "Secundaria Gral. Ignacio Manuel Altamirano", estado: "Tlaxcala", pass: "fermat_altamirano_2026",             valorSede: "TLAXCALA — SECUNDARIA GRAL. " },
-  SANTA_ELENA_ZAC: { nombre: "Colegio Santa Elena", estado: "Zacatecas", pass: "fermat_santaelena_2026",                                   valorSede: "ZACATECAS — COLEGIO SANTA ELENA, UNIVERSIDAD DE LA VERACRUZ" },
-  GTO:             { nombre: "Academia Eratóstenes de Educación Matemáticas, León", estado: "Guanajuato", pass: "fermat_eratostenes_2026", valorSede: "GUANAJUATO — ACADEMIA ERATÓSTENES DE EDUCACIÓN MATEMÁTICAS, LEÓN" },
-  CECYT16_HGO:     { nombre: 'CECyT No. 16 "Hidalgo" IPN', estado: "Hidalgo", pass: "fermat_cecyt16_2026", valorSede: "HIDALGO — CENTRO DE ESTUDIOS CIENTÍFICOS Y TECNOLÓGICOS NO. 16 HIDALGO" },
-  EDOMEX:          { nombre: "Coordinador Estado de México", estado: "Estado de México", pass: "fermat_edomex_2026",                        valorSede: "ESTADO DE MÉXICO", multiEstado: true },
-  BALMORAL_QRO:    { nombre: "Prepa Balmoral Escocés", estado: "Querétaro", pass: "fermat_balmoral_2026",                                    valorSede: "QUERÉTARO — PREPA BALMORAL ESCOCÉS" },
+  ESFM_IPN:        { nombre: "Escuela Superior de Física y Matemáticas del IPN", estado: "Ciudad de México", pass: "fermat_esfm_2026", niveles: ["sec","ms","sup"],     valorSede: "CDMX — ESCUELA SUPERIOR DE FÍSICA Y MATEMÁTICAS DEL IPN" },
+  ITI_GRO:         { nombre: "Instituto Tecnológico de Iguala", estado: "Guerrero", pass: "fermat_iguala_2026", niveles: ["sec","ms","sup"],                             valorSede: "GUERRERO — INSTITUTO TECNOLÓGICO DE IGUALA" },
+  HARKNESS_NAY:    { nombre: "Instituto Harkness en Bahía de Banderas", estado: "Nayarit", pass: "fermat_harkness_2026", niveles: ["sec","ms","sup"],                   valorSede: "NAYARIT — INSTITUTO HARKNESS EN BAHÍA DE BANDERAS" },
+  UNPA_OAX:        { nombre: "Universidad del Papaloapan", estado: "Oaxaca", pass: "fermat_unpa_2026", niveles: ["sec","ms","sup"],                                     valorSede: "OAXACA — UNIVERSIDAD DEL PAPALOAPAN" },
+  UTM_OAX:         { nombre: "Universidad Tecnológica de la Mixteca", estado: "Oaxaca", pass: "fermat_utm_2026", niveles: ["sec","ms","sup"],                           valorSede: "OAXACA — UNIVERSIDAD TECNOLÓGICA DE LA MIXTECA, HUAJUAPAN DE LEÓN" },
+  JTB_PUE:         { nombre: 'Bachillerato Gral. Oficial "Jaime Torres Bodet"', estado: "Puebla", pass: "fermat_jtb_2026", niveles: ["ms"],               valorSede: 'PUEBLA — BACHILLERATO GRAL. OFICIAL "JAIME TORRES BODET"' },
+  ZAPATA_BUAP:     { nombre: "Preparatorio Emiliano Zapata, BUAP", estado: "Puebla", pass: "fermat_zapata_2026", niveles: ["sec","ms","sup"],                           valorSede: "PUEBLA — PREPARATORIO EMILIANO ZAPATA, BUAP" },
+  PREPATEC_SLP:    { nombre: "PrepaTeC San Luis Potosí", estado: "San Luis Potosí", pass: "fermat_prepatec_2026", niveles: ["sec","ms","sup"],                          valorSede: "SAN LUIS POTOSÍ — PREPATEC" },
+  ALTAMIRANO_TLAX: { nombre: "Secundaria Gral. Ignacio Manuel Altamirano", estado: "Tlaxcala", pass: "fermat_altamirano_2026", niveles: ["sec","ms","sup"],             valorSede: "TLAXCALA — SECUNDARIA GRAL. " },
+  SANTA_ELENA_ZAC: { nombre: "Colegio Santa Elena", estado: "Zacatecas", pass: "fermat_santaelena_2026", niveles: ["sec","ms","sup"],                                   valorSede: "ZACATECAS — COLEGIO SANTA ELENA, UNIVERSIDAD DE LA VERACRUZ" },
+  GTO:             { nombre: "Academia Eratóstenes de Educación Matemáticas, León", estado: "Guanajuato", pass: "fermat_eratostenes_2026", niveles: ["sec","ms","sup"], valorSede: "GUANAJUATO — ACADEMIA ERATÓSTENES DE EDUCACIÓN MATEMÁTICAS, LEÓN" },
+  CECYT16_HGO:     { nombre: 'CECyT No. 16 "Hidalgo" IPN', estado: "Hidalgo", pass: "fermat_cecyt16_2026", niveles: ["sec","ms","sup"], valorSede: "HIDALGO — CENTRO DE ESTUDIOS CIENTÍFICOS Y TECNOLÓGICOS NO. 16 HIDALGO" },
+  EDOMEX:          { nombre: "Coordinador Estado de México", estado: "Estado de México", pass: "fermat_edomex_2026", niveles: ["sec","ms","sup"],                        valorSede: "ESTADO DE MÉXICO", multiEstado: true },
+  BALMORAL_QRO:    { nombre: "Prepa Balmoral Escocés", estado: "Querétaro", pass: "fermat_balmoral_2026", niveles: ["sec","ms","sup"],                                    valorSede: "QUERÉTARO — PREPA BALMORAL ESCOCÉS" },
 };
 
 let sedeActual = null;
@@ -587,6 +642,7 @@ function intentarLogin() {
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('dashboard-screen').style.display = 'block';
   document.getElementById('topbar-sede').textContent = SEDES[key].nombre;
+  mostrarDescargas();
   document.getElementById('topbar-estado').textContent = SEDES[key].estado;
 
   // Preconfigurar y cargar datos automáticamente
@@ -782,6 +838,54 @@ function descargarExcel() {
   XLSX.utils.book_append_sheet(wb, ws, sheetName);
   XLSX.writeFile(wb, `fermat2026_${(SEDES[sedeActual]?.nombre||'sede').replace(/\s+/g,'_').substring(0,30)}_${new Date().toISOString().slice(0,10)}.xlsx`);
 }
+
+function mostrarDescargas() {
+  const sede = SEDES[sedeActual];
+  if (!sede) return;
+
+  const BASE = "https://raw.githubusercontent.com/chackito/Registro-Pierre-Fermat-2026/main/";
+  const niveles = sede.niveles || ['sec', 'ms', 'sup'];
+
+  const archivos = {
+    sec: [
+      { nombre: 'Examen Secundaria',         archivo: 'EliminatorioSec.pdf' },
+      { nombre: 'Respuestas Secundaria',      archivo: 'RespuestasESec.pdf' },
+    ],
+    ms: [
+      { nombre: 'Examen Medio Superior',      archivo: 'EliminatorioMS.pdf' },
+      { nombre: 'Respuestas Medio Superior',  archivo: 'RespuestasEMS.pdf' },
+    ],
+    sup: [
+      { nombre: 'Examen Superior',            archivo: 'EliminatorioS.pdf' },
+      { nombre: 'Respuestas Superior',        archivo: 'RespuestasES.pdf' },
+    ],
+    comun: [
+      { nombre: 'Hoja de Respuestas',         archivo: 'Hojaderespuestas.pdf' },
+    ]
+  };
+
+  const etiquetas = { sec: 'Secundaria', ms: 'Medio Superior', sup: 'Superior' };
+  let html = '';
+
+  html += '<div class="dl-nivel">General</div><div class="downloads-grid">';
+  for (const f of archivos.comun) {
+    html += `<a class="btn-download" href="${BASE}${f.archivo}" target="_blank"><span class="dl-icon">📥</span> ${f.nombre}</a>`;
+  }
+  html += '</div>';
+
+  for (const niv of niveles) {
+    if (!archivos[niv]) continue;
+    html += `<div class="dl-nivel" style="margin-top:16px;">${etiquetas[niv]}</div><div class="downloads-grid">`;
+    for (const f of archivos[niv]) {
+      html += `<a class="btn-download" href="${BASE}${f.archivo}" target="_blank"><span class="dl-icon">📥</span> ${f.nombre}</a>`;
+    }
+    html += '</div>';
+  }
+
+  document.getElementById('downloads-content').innerHTML = html;
+  document.getElementById('downloads-section').style.display = 'block';
+}
+
 </script>
 </body>
 </html>
