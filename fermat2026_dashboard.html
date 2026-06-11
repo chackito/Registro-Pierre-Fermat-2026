@@ -606,20 +606,20 @@
 // ——— CREDENCIALES POR SEDE ———
 // CAMBIA LAS CONTRASEÑAS AQUÍ ANTES DE DISTRIBUIR
 const SEDES = {
-  ESFM_IPN:        { nombre: "Escuela Superior de Física y Matemáticas del IPN", estado: "Ciudad de México", pass: "fermat_esfm_2026", niveles: ["sec","ms","sup"],     valorSede: "CDMX — ESCUELA SUPERIOR DE FÍSICA Y MATEMÁTICAS DEL IPN" },
-  ITI_GRO:         { nombre: "Instituto Tecnológico de Iguala", estado: "Guerrero", pass: "fermat_iguala_2026", niveles: ["sec","ms","sup"],                             valorSede: "GUERRERO — INSTITUTO TECNOLÓGICO DE IGUALA" },
-  HARKNESS_NAY:    { nombre: "Instituto Harkness en Bahía de Banderas", estado: "Nayarit", pass: "fermat_harkness_2026", niveles: ["sec","ms","sup"],                   valorSede: "NAYARIT — INSTITUTO HARKNESS EN BAHÍA DE BANDERAS" },
-  UNPA_OAX:        { nombre: "Universidad del Papaloapan", estado: "Oaxaca", pass: "fermat_unpa_2026", niveles: ["sec","ms","sup"],                                     valorSede: "OAXACA — UNIVERSIDAD DEL PAPALOAPAN" },
-  UTM_OAX:         { nombre: "Universidad Tecnológica de la Mixteca", estado: "Oaxaca", pass: "fermat_utm_2026", niveles: ["sec","ms","sup"],                           valorSede: "OAXACA — UNIVERSIDAD TECNOLÓGICA DE LA MIXTECA, HUAJUAPAN DE LEÓN" },
-  JTB_PUE:         { nombre: 'Bachillerato Gral. Oficial "Jaime Torres Bodet"', estado: "Puebla", pass: "fermat_jtb_2026", niveles: ["ms"],               valorSede: 'PUEBLA — BACHILLERATO GRAL. OFICIAL "JAIME TORRES BODET"' },
-  ZAPATA_BUAP:     { nombre: "Preparatorio Emiliano Zapata, BUAP", estado: "Puebla", pass: "fermat_zapata_2026", niveles: ["sec","ms","sup"],                           valorSede: "PUEBLA — PREPARATORIO EMILIANO ZAPATA, BUAP" },
-  PREPATEC_SLP:    { nombre: "PrepaTeC San Luis Potosí", estado: "San Luis Potosí", pass: "fermat_prepatec_2026", niveles: ["sec","ms","sup"],                          valorSede: "SAN LUIS POTOSÍ — PREPATEC" },
-  ALTAMIRANO_TLAX: { nombre: "Secundaria Gral. Ignacio Manuel Altamirano", estado: "Tlaxcala", pass: "fermat_altamirano_2026", niveles: ["sec","ms","sup"],             valorSede: "TLAXCALA — SECUNDARIA GRAL. " },
-  SANTA_ELENA_ZAC: { nombre: "Colegio Santa Elena", estado: "Zacatecas", pass: "fermat_santaelena_2026", niveles: ["sec","ms","sup"],                                   valorSede: "ZACATECAS — COLEGIO SANTA ELENA, UNIVERSIDAD DE LA VERACRUZ" },
-  GTO:             { nombre: "Academia Eratóstenes de Educación Matemáticas, León", estado: "Guanajuato", pass: "fermat_eratostenes_2026", niveles: ["sec","ms","sup"], valorSede: "GUANAJUATO — ACADEMIA ERATÓSTENES DE EDUCACIÓN MATEMÁTICAS, LEÓN" },
-  CECYT16_HGO:     { nombre: 'CECyT No. 16 "Hidalgo" IPN', estado: "Hidalgo", pass: "fermat_cecyt16_2026", niveles: ["sec","ms","sup"], valorSede: "HIDALGO — CENTRO DE ESTUDIOS CIENTÍFICOS Y TECNOLÓGICOS NO. 16 HIDALGO" },
-  EDOMEX:          { nombre: "Coordinador Estado de México", estado: "Estado de México", pass: "fermat_edomex_2026", niveles: ["sec","ms","sup"],                        valorSede: "ESTADO DE MÉXICO", multiEstado: true },
-  BALMORAL_QRO:    { nombre: "Prepa Balmoral Escocés", estado: "Querétaro", pass: "fermat_balmoral_2026", niveles: ["sec","ms","sup"],                                    valorSede: "QUERÉTARO — PREPA BALMORAL ESCOCÉS" },
+  ESFM_IPN:        { nombre: "Escuela Superior de Física y Matemáticas del IPN", estado: "Ciudad de México", pass: "fermat_esfm_2026", niveles: ["sec","ms","sup"],     valorSede: "CDMX — ESCUELA SUPERIOR DE FÍSICA Y MATEMÁTICAS DEL IPN" }, hoja: "HojasderespuestasESFM.pdf" }
+  ITI_GRO:         { nombre: "Instituto Tecnológico de Iguala", estado: "Guerrero", pass: "fermat_iguala_2026", niveles: ["sec","ms","sup"],                             valorSede: "GUERRERO — INSTITUTO TECNOLÓGICO DE IGUALA" }, hoja: "HojasderespuestasITI.pdf" }
+  HARKNESS_NAY:    { nombre: "Instituto Harkness en Bahía de Banderas", estado: "Nayarit", pass: "fermat_harkness_2026", niveles: ["sec","ms","sup"],                   valorSede: "NAYARIT — INSTITUTO HARKNESS EN BAHÍA DE BANDERAS" }, hoja: "HojasderespuestasIHBB.pdf" }
+  UNPA_OAX:        { nombre: "Universidad del Papaloapan", estado: "Oaxaca", pass: "fermat_unpa_2026", niveles: ["sec","ms","sup"],                                     valorSede: "OAXACA — UNIVERSIDAD DEL PAPALOAPAN" }, hoja: "HojasderespuestasUNPA.pdf" }
+  UTM_OAX:         { nombre: "Universidad Tecnológica de la Mixteca", estado: "Oaxaca", pass: "fermat_utm_2026", niveles: ["sec","ms","sup"],                           valorSede: "OAXACA — UNIVERSIDAD TECNOLÓGICA DE LA MIXTECA, HUAJUAPAN DE LEÓN" }, hoja: "HojasderespuestasUTM.pdf" }
+  JTB_PUE:         { nombre: 'Bachillerato Gral. Oficial "Jaime Torres Bodet"', estado: "Puebla", pass: "fermat_jtb_2026", niveles: ["ms"],               valorSede: 'PUEBLA — BACHILLERATO GRAL. OFICIAL "JAIME TORRES BODET"' }, hoja: "HojasderespuestasBGOJTB.pdf" }
+  ZAPATA_BUAP:     { nombre: "Preparatorio Emiliano Zapata, BUAP", estado: "Puebla", pass: "fermat_zapata_2026", niveles: ["sec","ms","sup"],                           valorSede: "PUEBLA — PREPARATORIO EMILIANO ZAPATA, BUAP" }, hoja: "HojasderespuestasPEZBUAP.pdf" }
+  PREPATEC_SLP:    { nombre: "PrepaTeC San Luis Potosí", estado: "San Luis Potosí", pass: "fermat_prepatec_2026", niveles: ["sec","ms","sup"],                          valorSede: "SAN LUIS POTOSÍ — PREPATEC" }, hoja: "HojasderespuestasPT.pdf" }
+  ALTAMIRANO_TLAX: { nombre: "Secundaria Gral. Ignacio Manuel Altamirano", estado: "Tlaxcala", pass: "fermat_altamirano_2026", niveles: ["sec","ms","sup"],             valorSede: "TLAXCALA — SECUNDARIA GRAL. " }, hoja: "HojasderespuestasSGIMA.pdf" }
+  SANTA_ELENA_ZAC: { nombre: "Colegio Santa Elena", estado: "Zacatecas", pass: "fermat_santaelena_2026", niveles: ["sec","ms","sup"],                                   valorSede: "ZACATECAS — COLEGIO SANTA ELENA, UNIVERSIDAD DE LA VERACRUZ" }, hoja: "HojasderespuestasCSEULV.pdf" }
+  GTO:             { nombre: "Academia Eratóstenes de Educación Matemáticas, León", estado: "Guanajuato", pass: "fermat_eratostenes_2026", niveles: ["sec","ms","sup"], valorSede: "GUANAJUATO — ACADEMIA ERATÓSTENES DE EDUCACIÓN MATEMÁTICAS, LEÓN" }, hoja: "HojasderespuestasAE.pdf" }
+  CECYT16_HGO:     { nombre: 'CECyT No. 16 "Hidalgo" IPN', estado: "Hidalgo", pass: "fermat_cecyt16_2026", niveles: ["sec","ms","sup"], valorSede: "HIDALGO — CENTRO DE ESTUDIOS CIENTÍFICOS Y TECNOLÓGICOS NO. 16 HIDALGO" }, hoja: "HojasderespuestasCECYT16.pdf" }
+  EDOMEX:          { nombre: "Coordinador Estado de México", estado: "Estado de México", pass: "fermat_edomex_2026", niveles: ["sec","ms","sup"],                        valorSede: "ESTADO DE MÉXICO", multiEstado: true }, hoja: "HojasderespuestasEDOMEX.pdf" }
+  BALMORAL_QRO:    { nombre: "Prepa Balmoral Escocés", estado: "Querétaro", pass: "fermat_balmoral_2026", niveles: ["sec","ms","sup"],                                    valorSede: "QUERÉTARO — PREPA BALMORAL ESCOCÉS" }, hoja: "HojasderespuestasPBE.pdf" }
 };
 
 let sedeActual = null;
@@ -860,7 +860,7 @@ function mostrarDescargas() {
       { nombre: 'Respuestas Superior',        archivo: 'RespuestasES.pdf' },
     ],
     comun: [
-      { nombre: 'Hoja de Respuestas',         archivo: 'Hojaderespuestas.pdf' },
+      { nombre: 'Hoja de Respuestas', archivo: sede.hoja || 'Hojaderespuestas.pdf' },
     ]
   };
 
