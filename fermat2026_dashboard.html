@@ -973,15 +973,37 @@ function mostrarDescargas() {
 const APPS_SCRIPT_CAL_URL = 'https://script.google.com/macros/s/AKfycbyZa8iKoGuVoc_E63WMiATN9A6eZLKc2RPIsMoVIXCdrAnX2qMibaVZ2WiwefNgyDnpgQ/exec';
 let alumnosCalificar = [];
 
-function abrirCalificar() {
+async function abrirCalificar() {
   document.getElementById('dashboard-screen').style.display = 'none';
   document.getElementById('calificar-screen').style.display = 'block';
   const sede = SEDES[sedeActual];
   document.getElementById('cal-sede-label').textContent = sede.nombre + ' — ' + sede.estado;
+  document.getElementById('cal-tbody').innerHTML = '<tr><td colspan="6" style="text-align:center;padding:2rem;color:#6B5F45">Cargando puntajes...</td></tr>';
+
+  // Construir lista base
   alumnosCalificar = todosAlumnos.map(row => ({
     folio: row[0] ?? '', nombre: row[2] ?? '', apellidoP: row[3] ?? '',
     apellidoM: row[4] ?? '', nivel: row[7] ?? '', sede: row[8] ?? '', puntaje: 'NP'
   })).sort((a, b) => (a.apellidoP + ' ' + a.apellidoM).toLowerCase().localeCompare((b.apellidoP + ' ' + b.apellidoM).toLowerCase(), 'es'));
+
+  // Cargar puntajes ya guardados
+  try {
+    const res = await fetch(APPS_SCRIPT_CAL_URL, {
+      method: 'POST',
+      body: JSON.stringify({ accion: 'leerPuntajes', sede: sede.valorSede })
+    });
+    const data = await res.json();
+    if (data.ok && data.puntajes) {
+      alumnosCalificar.forEach(a => {
+        if (data.puntajes[a.folio] !== undefined) {
+          a.puntaje = data.puntajes[a.folio];
+        }
+      });
+    }
+  } catch(e) {
+    console.warn('No se pudieron cargar puntajes previos:', e);
+  }
+
   const esEdomex = sede.multiEstado ?? false;
   document.getElementById('edomex-selector').style.display = esEdomex ? 'block' : 'none';
   document.getElementById('cal-th-sede').style.display = esEdomex ? '' : 'none';
@@ -1011,7 +1033,7 @@ function renderCalTabla(lista, subsede) {
     return `<tr>
       <td style="padding:8px 12px;color:#6B5F45;font-size:0.78rem;border-bottom:1px solid rgba(184,134,11,0.1)">${idx+1}</td>
       <td style="padding:8px 12px;font-size:0.78rem;color:#6B5F45;border-bottom:1px solid rgba(184,134,11,0.1)">${a.folio}</td>
-      <td style="padding:8px 12px;border-bottom:1px solid rgba(184,134,11,0.1)"><strong>${a.apellidoP} ${a.apellidoM}</strong>, ${a.nombre}</td>
+      <td style="padding:8px 12px;border-bottom:1px solid rgba(184,134,11,0.1)"><strong>${a.apellidoP.toUpperCase()} ${a.apellidoM.toUpperCase()}</strong>, ${a.nombre.toUpperCase()}</td>
       <td style="padding:8px 12px;font-size:0.78rem;border-bottom:1px solid rgba(184,134,11,0.1)">${a.nivel}</td>
       ${esEdomex?`<td style="padding:8px 12px;font-size:0.78rem;color:#6B5F45;border-bottom:1px solid rgba(184,134,11,0.1)">${a.sede}</td>`:''}
       <td style="padding:8px 12px;border-bottom:1px solid rgba(184,134,11,0.1)"><select data-idx="${gi}" onchange="alumnosCalificar[this.dataset.idx].puntaje=this.value" style="padding:5px 8px;border:1px solid rgba(184,134,11,0.2);border-radius:6px;font-family:DM Sans,sans-serif;font-size:0.85rem;background:#FAF7F0;">${opts}</select></td>
