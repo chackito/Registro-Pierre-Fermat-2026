@@ -999,6 +999,11 @@ async function abrirCalificar() {
           a.puntaje = data.puntajes[a.folio];
         }
       });
+      // Agregar alumnos manuales
+      if (data.manuales && data.manuales.length) {
+        data.manuales.forEach(m => alumnosCalificar.push(m));
+        alumnosCalificar.sort((a, b) => (a.apellidoP + ' ' + a.apellidoM).toLowerCase().localeCompare((b.apellidoP + ' ' + b.apellidoM).toLowerCase(), 'es'));
+      }
     }
   } catch(e) {
     console.warn('No se pudieron cargar puntajes previos:', e);
