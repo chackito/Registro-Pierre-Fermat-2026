@@ -190,6 +190,247 @@
     transition: all 0.15s;
   }
   .btn-sm:hover { background: var(--paper-dark); }
+  .btn-calificar {
+    padding: 7px 16px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid rgba(184,134,11,0.5);
+    background: var(--gold-light);
+    color: var(--gold-dark);
+    transition: all 0.15s;
+  }
+  .btn-calificar:hover { background: #edd97a; }
+
+  /* ——— PANTALLA CALIFICAR ——— */
+  #calificar-screen {
+    display: none;
+    padding: 0;
+  }
+  .cal-topbar {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .cal-topbar h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+  }
+  .cal-body { padding: 1.75rem 2rem; }
+  .cal-info {
+    background: var(--gold-light);
+    border: 1px solid rgba(184,134,11,0.3);
+    border-radius: 10px;
+    padding: 0.9rem 1.25rem;
+    font-size: 0.85rem;
+    color: var(--gold-dark);
+    margin-bottom: 1.5rem;
+  }
+  .edomex-selector {
+    margin-bottom: 1.5rem;
+    display: none;
+  }
+  .edomex-selector label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .edomex-selector select {
+    padding: 9px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    background: var(--paper);
+    color: var(--ink);
+    outline: none;
+    min-width: 320px;
+  }
+  .cal-table-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+  .cal-table-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    background: var(--paper);
+  }
+  .cal-table-header h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    font-weight: 400;
+  }
+  .cal-table-wrapper { overflow-x: auto; }
+  .cal-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+  .cal-table thead th {
+    padding: 9px 12px;
+    text-align: left;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    background: var(--paper);
+    white-space: nowrap;
+  }
+  .cal-table tbody td {
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(184,134,11,0.1);
+    vertical-align: middle;
+  }
+  .cal-table tbody tr:last-child td { border-bottom: none; }
+  .cal-table tbody tr:hover td { background: var(--paper); }
+  .puntaje-select {
+    padding: 5px 8px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    background: var(--paper);
+    color: var(--ink);
+    outline: none;
+    min-width: 80px;
+  }
+  .puntaje-select:focus { border-color: var(--gold); }
+  .badge-np {
+    display: inline-block;
+    padding: 2px 8px;
+    background: #f0f0f0;
+    color: #888;
+    border-radius: 99px;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+  .cal-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .btn-agregar-alumno {
+    padding: 9px 18px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--paper);
+    color: var(--ink);
+    transition: all 0.15s;
+  }
+  .btn-agregar-alumno:hover { background: var(--paper-dark); }
+  .btn-guardar-cal {
+    padding: 9px 22px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    background: var(--ink);
+    color: var(--gold-light);
+    transition: background 0.2s;
+  }
+  .btn-guardar-cal:hover { background: var(--gold-dark); }
+  .btn-guardar-cal:disabled { opacity: 0.5; cursor: not-allowed; }
+  .cal-status {
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .cal-status.ok { color: var(--green); font-weight: 600; }
+  .cal-status.err { color: var(--red); }
+
+  /* Modal agregar alumno */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+  }
+  .modal-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 1.25rem;
+  }
+  .modal-field { margin-bottom: 1rem; }
+  .modal-field label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin-bottom: 5px;
+  }
+  .modal-field input, .modal-field select {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    background: var(--paper);
+    color: var(--ink);
+    outline: none;
+  }
+  .modal-field input:focus, .modal-field select:focus { border-color: var(--gold); }
+  .modal-btns { display: flex; gap: 10px; margin-top: 1.25rem; justify-content: flex-end; }
+  .btn-modal-cancel {
+    padding: 8px 18px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--paper);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    cursor: pointer;
+  }
+  .btn-modal-ok {
+    padding: 8px 18px;
+    border-radius: 8px;
+    border: none;
+    background: var(--ink);
+    color: var(--gold-light);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
   .btn-logout {
     padding: 7px 14px;
     border-radius: 8px;
@@ -509,6 +750,96 @@
   </div>
 </div>
 
+<!-- ============ PANTALLA CALIFICAR ============ -->
+<div id="calificar-screen">
+  <div class="cal-topbar">
+    <div>
+      <h2>✏️ Calificar Examen Eliminatorio</h2>
+      <div style="font-size:0.8rem;color:var(--muted)" id="cal-sede-label">—</div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;">
+      <button class="btn-sm" onclick="cerrarCalificar()">← Volver al dashboard</button>
+    </div>
+  </div>
+
+  <div class="cal-body">
+    <div class="cal-info">
+      Los puntajes son de <strong>0 a 25</strong>. Los alumnos sin puntaje aparecen como <strong>NP</strong> (No Presentó). Puedes agregar alumnos que no están en la lista. Al terminar presiona <strong>Guardar puntajes</strong>.
+    </div>
+
+    <!-- Selector subsede para Edomex -->
+    <div class="edomex-selector" id="edomex-selector">
+      <label>Subsede</label>
+      <select id="edomex-subsede" onchange="filtrarPorSubsede()">
+        <option value="">— Todas las subsedes —</option>
+      </select>
+    </div>
+
+    <div class="cal-table-card">
+      <div class="cal-table-header">
+        <h3 id="cal-table-title">Lista de alumnos</h3>
+        <div style="font-size:0.8rem;color:var(--muted)" id="cal-count">—</div>
+      </div>
+      <div class="cal-table-wrapper">
+        <table class="cal-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Folio</th>
+              <th>Nombre</th>
+              <th>Nivel</th>
+              <th id="cal-th-sede" style="display:none">Subsede</th>
+              <th>Puntaje</th>
+            </tr>
+          </thead>
+          <tbody id="cal-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="cal-actions">
+      <button class="btn-agregar-alumno" onclick="abrirModalAgregar()">+ Agregar alumno</button>
+      <button class="btn-guardar-cal" id="btn-guardar" onclick="guardarPuntajes()">💾 Guardar puntajes</button>
+      <span class="cal-status" id="cal-status"></span>
+    </div>
+  </div>
+</div>
+
+<!-- Modal agregar alumno -->
+<div class="modal-overlay" id="modal-agregar">
+  <div class="modal-card">
+    <h3>Agregar alumno</h3>
+    <div class="modal-field">
+      <label>Nombre</label>
+      <input type="text" id="m-nombre" placeholder="Nombre(s)">
+    </div>
+    <div class="modal-field">
+      <label>Apellido Paterno</label>
+      <input type="text" id="m-ap" placeholder="Apellido paterno">
+    </div>
+    <div class="modal-field">
+      <label>Apellido Materno</label>
+      <input type="text" id="m-am" placeholder="Apellido materno">
+    </div>
+    <div class="modal-field">
+      <label>Nivel</label>
+      <select id="m-nivel">
+        <option value="Secundaria">Secundaria</option>
+        <option value="Medio superior">Medio superior</option>
+        <option value="Superior">Superior</option>
+      </select>
+    </div>
+    <div class="modal-field">
+      <label>Folio (opcional)</label>
+      <input type="text" id="m-folio" placeholder="Ej: FERMAT-2026-00000">
+    </div>
+    <div class="modal-btns">
+      <button class="btn-modal-cancel" onclick="cerrarModal()">Cancelar</button>
+      <button class="btn-modal-ok" onclick="confirmarAgregarAlumno()">Agregar</button>
+    </div>
+  </div>
+</div>
+
 <!-- ============ DASHBOARD ============ -->
 <div id="dashboard-screen">
 
@@ -523,6 +854,7 @@
     <div class="topbar-right">
       <span class="last-update" id="last-update">—</span>
       <button class="btn-sm" onclick="cargarDatos(true)">↻ Actualizar</button>
+      <button class="btn-calificar" onclick="abrirCalificar()">✏️ Calificar</button>
       <button class="btn-logout" onclick="cerrarSesion()">Cerrar sesión</button>
     </div>
   </div>
@@ -886,6 +1218,159 @@ function mostrarDescargas() {
   document.getElementById('downloads-section').style.display = 'block';
 }
 
-</script>
+// ——— CALIFICAR ———
+const APPS_SCRIPT_CAL_URL = 'PEGA_AQUI_LA_URL_DEL_APPS_SCRIPT';
+
+let alumnosCalificar = []; // [{folio, nombre, apellidoP, apellidoM, nivel, sede, puntaje}]
+
+function abrirCalificar() {
+  document.getElementById('dashboard-screen').style.display = 'none';
+  document.getElementById('calificar-screen').style.display = 'block';
+  const sede = SEDES[sedeActual];
+  document.getElementById('cal-sede-label').textContent = sede.nombre + ' — ' + sede.estado;
+
+  // Construir lista desde todosAlumnos
+  alumnosCalificar = todosAlumnos.map(row => ({
+    folio: row[0] ?? '',
+    nombre: row[2] ?? '',
+    apellidoP: row[3] ?? '',
+    apellidoM: row[4] ?? '',
+    nivel: row[7] ?? '',
+    sede: row[8] ?? '',
+    puntaje: 'NP'
+  }));
+
+  const esEdomex = sede.multiEstado ?? false;
+  const selectorEl = document.getElementById('edomex-selector');
+  const thSede = document.getElementById('cal-th-sede');
+
+  if (esEdomex) {
+    selectorEl.style.display = 'block';
+    thSede.style.display = '';
+    // Poblar subsedes únicas
+    const subsedes = [...new Set(alumnosCalificar.map(a => a.sede))].sort();
+    const sel = document.getElementById('edomex-subsede');
+    sel.innerHTML = '<option value="">— Todas las subsedes —</option>';
+    subsedes.forEach(s => {
+      const opt = document.createElement('option');
+      opt.value = s; opt.textContent = s;
+      sel.appendChild(opt);
+    });
+  } else {
+    selectorEl.style.display = 'none';
+    thSede.style.display = 'none';
+  }
+
+  renderCalTabla(alumnosCalificar);
+}
+
+function filtrarPorSubsede() {
+  const val = document.getElementById('edomex-subsede').value;
+  const filtrados = val ? alumnosCalificar.filter(a => a.sede === val) : alumnosCalificar;
+  renderCalTabla(filtrados, val);
+}
+
+function renderCalTabla(lista, subsede) {
+  const esEdomex = SEDES[sedeActual]?.multiEstado ?? false;
+  const tbody = document.getElementById('cal-tbody');
+  document.getElementById('cal-count').textContent = lista.length + ' alumno(s)';
+  document.getElementById('cal-table-title').textContent = subsede ? subsede : 'Lista de alumnos';
+
+  if (!lista.length) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--muted)">No hay alumnos para mostrar.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = lista.map((a, idx) => {
+    const globalIdx = alumnosCalificar.indexOf(a);
+    const opts = ['NP', ...Array.from({length:26}, (_,i)=>i)].map(v =>
+      `<option value="${v}" ${a.puntaje == v ? 'selected' : ''}>${v}</option>`
+    ).join('');
+    return `<tr>
+      <td style="color:var(--muted);font-size:0.78rem">${idx+1}</td>
+      <td style="font-size:0.78rem;color:var(--muted)">${a.folio}</td>
+      <td><strong>${a.apellidoP} ${a.apellidoM}</strong>, ${a.nombre}</td>
+      <td><span style="font-size:0.78rem">${a.nivel}</span></td>
+      ${esEdomex ? `<td style="font-size:0.78rem;color:var(--muted)">${a.sede}</td>` : ''}
+      <td><select class="puntaje-select" data-idx="${globalIdx}" onchange="actualizarPuntaje(this)">${opts}</select></td>
+    </tr>`;
+  }).join('');
+}
+
+function actualizarPuntaje(sel) {
+  const idx = parseInt(sel.dataset.idx);
+  alumnosCalificar[idx].puntaje = sel.value;
+}
+
+async function guardarPuntajes() {
+  const btn = document.getElementById('btn-guardar');
+  const statusEl = document.getElementById('cal-status');
+  btn.disabled = true;
+  statusEl.className = 'cal-status';
+  statusEl.textContent = 'Guardando…';
+
+  const payload = alumnosCalificar.map(a => ({
+    folio: a.folio,
+    nombre: a.nombre,
+    apellidoP: a.apellidoP,
+    apellidoM: a.apellidoM,
+    nivel: a.nivel,
+    sede: a.sede,
+    puntaje: a.puntaje
+  }));
+
+  try {
+    const res = await fetch(APPS_SCRIPT_CAL_URL, {
+      method: 'POST',
+      body: JSON.stringify({ accion: 'guardarPuntajes', datos: payload })
+    });
+    const data = await res.json();
+    if (data.ok) {
+      statusEl.className = 'cal-status ok';
+      statusEl.textContent = '✓ Puntajes guardados correctamente';
+    } else {
+      throw new Error(data.error || 'Error desconocido');
+    }
+  } catch(e) {
+    statusEl.className = 'cal-status err';
+    statusEl.textContent = '⚠️ ' + e.message;
+  }
+  btn.disabled = false;
+}
+
+function cerrarCalificar() {
+  document.getElementById('calificar-screen').style.display = 'none';
+  document.getElementById('dashboard-screen').style.display = 'block';
+}
+
+// ——— MODAL AGREGAR ALUMNO ———
+function abrirModalAgregar() {
+  document.getElementById('m-nombre').value = '';
+  document.getElementById('m-ap').value = '';
+  document.getElementById('m-am').value = '';
+  document.getElementById('m-folio').value = '';
+  document.getElementById('modal-agregar').classList.add('active');
+}
+
+function cerrarModal() {
+  document.getElementById('modal-agregar').classList.remove('active');
+}
+
+function confirmarAgregarAlumno() {
+  const nombre = document.getElementById('m-nombre').value.trim();
+  const ap = document.getElementById('m-ap').value.trim();
+  const am = document.getElementById('m-am').value.trim();
+  const nivel = document.getElementById('m-nivel').value;
+  const folio = document.getElementById('m-folio').value.trim() || '(manual)';
+  if (!nombre && !ap) { alert('Ingresa al menos el nombre o apellido.'); return; }
+  const sede = SEDES[sedeActual];
+  alumnosCalificar.push({ folio, nombre, apellidoP: ap, apellidoM: am, nivel, sede: sede.valorSede, puntaje: 'NP' });
+  cerrarModal();
+  const subsede = document.getElementById('edomex-subsede')?.value || '';
+  const lista = subsede ? alumnosCalificar.filter(a => a.sede === subsede) : alumnosCalificar;
+  renderCalTabla(lista, subsede);
+}
+
+
 </body>
 </html>
