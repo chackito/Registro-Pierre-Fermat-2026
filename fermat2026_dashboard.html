@@ -981,7 +981,7 @@ function abrirCalificar() {
   alumnosCalificar = todosAlumnos.map(row => ({
     folio: row[0] ?? '', nombre: row[2] ?? '', apellidoP: row[3] ?? '',
     apellidoM: row[4] ?? '', nivel: row[7] ?? '', sede: row[8] ?? '', puntaje: 'NP'
-  }));
+  })).sort((a, b) => (a.apellidoP + ' ' + a.apellidoM).toLowerCase().localeCompare((b.apellidoP + ' ' + b.apellidoM).toLowerCase(), 'es'));
   const esEdomex = sede.multiEstado ?? false;
   document.getElementById('edomex-selector').style.display = esEdomex ? 'block' : 'none';
   document.getElementById('cal-th-sede').style.display = esEdomex ? '' : 'none';
