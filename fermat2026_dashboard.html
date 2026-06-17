@@ -999,9 +999,13 @@ async function abrirCalificar() {
           a.puntaje = data.puntajes[a.folio];
         }
       });
-      // Agregar alumnos manuales
+      // Agregar alumnos manuales (sin duplicar)
       if (data.manuales && data.manuales.length) {
-        data.manuales.forEach(m => alumnosCalificar.push(m));
+        const nombresExistentes = new Set(alumnosCalificar.map(a => (a.apellidoP + '|' + a.apellidoM + '|' + a.nombre).toUpperCase()));
+        data.manuales.forEach(m => {
+          const clave = (m.apellidoP + '|' + m.apellidoM + '|' + m.nombre).toUpperCase();
+          if (!nombresExistentes.has(clave)) alumnosCalificar.push(m);
+        });
         alumnosCalificar.sort((a, b) => (a.apellidoP + ' ' + a.apellidoM).toLowerCase().localeCompare((b.apellidoP + ' ' + b.apellidoM).toLowerCase(), 'es'));
       }
     }
