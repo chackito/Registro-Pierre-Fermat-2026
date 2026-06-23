@@ -980,6 +980,11 @@ async function abrirCalificar() {
   document.getElementById('cal-sede-label').textContent = sede.nombre + ' — ' + sede.estado;
   document.getElementById('cal-tbody').innerHTML = '<tr><td colspan="6" style="text-align:center;padding:2rem;color:#6B5F45">Cargando puntajes...</td></tr>';
 
+  // Si todavía no se cargaron los alumnos registrados, cargarlos antes de continuar
+  if (!todosAlumnos.length) {
+    try { await cargarDatos(true); } catch(e) { console.warn('No se pudieron cargar alumnos:', e); }
+  }
+
   // Construir lista base
   alumnosCalificar = todosAlumnos.map(row => ({
     folio: row[0] ?? '', nombre: row[2] ?? '', apellidoP: row[3] ?? '',
