@@ -1060,7 +1060,16 @@ async function guardarPuntajes() {
       body: JSON.stringify({ accion: 'guardarPuntajes', datos: alumnosCalificar })
     });
     const data = await res.json();
-    if (data.ok) { st.style.color='#1A5C2E'; st.textContent = '✓ Guardado correctamente'; }
+    if (data.ok) {
+      st.style.color='#1A5C2E'; st.textContent = '✓ Guardado correctamente';
+      // Si se asignaron folios nuevos a manuales, actualizarlos en la lista local
+      // para que no se vuelvan a duplicar en el próximo guardado.
+      if (data.foliosAsignados) {
+        alumnosCalificar.forEach(a => {
+          if (data.foliosAsignados[a.folio]) a.folio = data.foliosAsignados[a.folio];
+        });
+      }
+    }
     else throw new Error(data.error || 'Error');
   } catch(e) { st.style.color='#8B1A1A'; st.textContent = '⚠️ ' + e.message; }
   btn.disabled = false;
